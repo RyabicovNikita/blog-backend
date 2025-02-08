@@ -14,6 +14,10 @@ app.use(express.json());
 
 app.use("/api", routes);
 
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve("..", "blog-frontend", "build", "index.html"));
+});
+
 mongoose.connect(process.env.DB_CONNECTION_STRING).then(() => {
   app.listen(port, () => {
     console.log("Server has been start on port " + port);
