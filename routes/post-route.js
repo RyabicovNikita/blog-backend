@@ -24,6 +24,10 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const post = await getPost(req.params.id);
+  if (!post) {
+    res.send({ error: "Post not found" });
+    return;
+  }
   res.send({ body: mapPost(post) });
 });
 
